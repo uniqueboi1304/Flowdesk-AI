@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 type Customer = {
   name: string;
@@ -12,16 +12,33 @@ type Customer = {
 
 type CustomerFormProps = {
   onSave: (customer: Customer) => void;
+  customer?: Customer | null;
 };
 
 export default function CustomerForm({
   onSave,
+  customer,
 }: CustomerFormProps) {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [business, setBusiness] = useState("");
   const [address, setAddress] = useState("");
+  useEffect(() => {
+  if (customer) {
+    setFullName(customer.name);
+    setEmail(customer.email);
+    setPhone(customer.phone);
+    setBusiness(customer.business);
+    setAddress(customer.address);
+  } else {
+    setFullName("");
+    setEmail("");
+    setPhone("");
+    setBusiness("");
+    setAddress("");
+  }
+}, [customer]);
 
   function handleSubmit() {
     onSave({

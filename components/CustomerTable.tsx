@@ -10,10 +10,11 @@ type Customer = {
 
 type CustomerTableProps = {
   customers: Customer[];
+  onEdit: (customer: Customer) => void;
 };
-
 export default function CustomerTable({
   customers,
+  onEdit,
 }: CustomerTableProps) {
   return (
     <div className="bg-white rounded-xl shadow border overflow-hidden">
@@ -49,9 +50,12 @@ export default function CustomerTable({
 
               <td className="p-4">{customer.status}</td>
               <td className="p-4 text-center">
-  <button className="bg-yellow-500 text-white px-3 py-1 rounded mr-2 hover:bg-yellow-600">
-    Edit
-  </button>
+  <button
+  onClick={() => onEdit(customer)}
+  className="bg-yellow-500 text-white px-3 py-1 rounded mr-2 hover:bg-yellow-600"
+>
+  Edit
+</button>
 
   <button className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">
     Delete

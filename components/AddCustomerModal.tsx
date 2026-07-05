@@ -12,12 +12,14 @@ type AddCustomerModalProps = {
   isOpen: boolean;
   onClose: () => void;
   onSave: (customer: Customer) => void;
+  customer?: Customer | null;
 };
 
 export default function AddCustomerModal({
   isOpen,
   onClose,
-  onSave,
+  onSave, 
+  customer,
 }: AddCustomerModalProps) {
   if (!isOpen) return null;
 
@@ -28,7 +30,10 @@ export default function AddCustomerModal({
           Add New Customer
         </h2>
 
-        <CustomerForm onSave={onSave} />
+        <CustomerForm
+  onSave={onSave}
+  customer={customer}
+/>
 
         <div className="flex justify-end mt-6">
           <button
